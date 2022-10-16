@@ -1,6 +1,6 @@
 # token for openweather api
 import datetime
-#from pprint import pprint
+from pprint import pprint
 
 import requests
 
@@ -18,20 +18,29 @@ def get_weather(city, weather_token):
         curr_temp = json_data["main"]["temp"]
         max_temp = json_data["main"]["temp_max"]
         min_temp = json_data["main"]["temp_min"]
-        fills_temp = json_data["main"]["feels_like"]
+        feels_temp = json_data["main"]["feels_like"]
         humidity = json_data["main"]["humidity"]
         pressure = json_data["main"]["pressure"]
         wind_speed = json_data["wind"]["speed"]
-        sunrise = datetime.datetime.fromtimestamp(json_data["sys"]["sunrise"])
-        sunset = datetime.datetime.fromtimestamp(json_data["sys"]["sunset"])
+        return f"Date and time: {datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}\n" \
+               f"Your location: {city}\n" \
+               f"Weather: {weather_desc}\n" \
+               f"Current temperature: {curr_temp}\n" \
+               f"Minimal temperature: {min_temp}, maximal temperature: {max_temp}\n" \
+               f"Temperature feels like: {feels_temp}\n" \
+               f"Humidity: {humidity}\n" \
+               f"Pressure: {pressure}\n" \
+               f"Wind Speed: {wind_speed}"
 
-    except:
+
+
+    except KeyError:
         print("Please, check name of a city you entered")
 
 
 def main():
     city = input()
-    get_weather(city, weather_token)
+    print(get_weather(city, weather_token))
 
 
 if __name__ == '__main__':
