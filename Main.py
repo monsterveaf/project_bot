@@ -47,7 +47,7 @@ def start(update: tg.Update, context: tge.CallbackContext):
         or received a /start command"""
 
     context.bot.send_message(chat_id=update.effective_chat.id, text=f"Hello, {update.effective_chat.first_name}, jan.\n"
-                                                                    "I can tell the weather today, ebana.\n"
+                                                                    "I can tell you the weather today, ebana.\n"
                                                                     "Please, send me the ciy i tuda priedut bratki.\n"
                                                                     "Bistro nahui blyat!")
 
@@ -72,21 +72,18 @@ def inline_caps(update: tg.Update, context: tge.CallbackContext):
     query = update.inline_query.query
 
     if not query:
-        return "hui"
+        return "Shoto strannoe"
 
-    results = []
-    results.append(
-        tg.InlineQueryResultArticle(
-            id=query.upper(),
-            title='Weather',
-            input_message_content=tg.InputTextMessageContent(get_weather(query, weather_token))
-        )
-    )
+    results = [tg.InlineQueryResultArticle(
+        id=query.upper(),
+        title='Weather',
+        input_message_content=tg.InputTextMessageContent(get_weather(query, weather_token)),
+        description=f"Today's weather for {query}"
+    )]
     context.bot.answer_inline_query(update.inline_query.id, results)
 
 
 if __name__ == '__main__':
-
     # Create a tracker for start command with welcome speech
     start_handler = tge.CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
