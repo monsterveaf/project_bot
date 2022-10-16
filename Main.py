@@ -23,13 +23,21 @@ def get_weather(city, token):
         curr_temp = json_data["main"]["temp"]
         max_temp = json_data["main"]["temp_max"]
         min_temp = json_data["main"]["temp_min"]
-        fills_temp = json_data["main"]["feels_like"]
+        feels_temp = json_data["main"]["feels_like"]
         humidity = json_data["main"]["humidity"]
         pressure = json_data["main"]["pressure"]
         wind_speed = json_data["wind"]["speed"]
 
-        return city, weather_desc, curr_temp, max_temp, min_temp, fills_temp, \
-            humidity, pressure, wind_speed
+        return f"Date and time: {datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}\n" \
+               f"Your location: {city}\n" \
+               f"Weather description: {weather_desc}\n" \
+               f"Current temperature: {curr_temp}\n" \
+               f"Minimal temperature: {min_temp}, maximal temperature: {max_temp}\n" \
+               f"Temperature feels like: {feels_temp}\n" \
+               f"Humidity: {humidity}\n" \
+               f"Pressure: {pressure}\n" \
+               f"Wind speed: {wind_speed}"
+
 
     except KeyError:
         return "Please, check name of a city you entered"
