@@ -11,7 +11,8 @@ def start(update: tg.Update, context: tge.CallbackContext):
     """ Send message, when the bot is started
         or received a /start command"""
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text="I can tell the weather today. "
+    context.bot.send_message(chat_id=update.effective_chat.id, text=f"Hello, {update.effective_chat.first_name} "
+                                                                    "I can tell the weather today. "
                                                                     "Please, send me the ciy. "  
                                                                     "Bistro nahui blyat!")
 
