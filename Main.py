@@ -32,7 +32,8 @@ def get_weather(city, token):
                f"Your location: {city}\n" \
                f"Weather description: {weather_desc}\n" \
                f"Current temperature: {curr_temp}\n" \
-               f"Minimal temperature: {min_temp}, maximal temperature: {max_temp}\n" \
+               f"Minimal temperature: {min_temp}\n" \
+               f"Maximal temperature: {max_temp}\n" \
                f"Temperature feels like: {feels_temp}\n" \
                f"Humidity: {humidity}\n" \
                f"Pressure: {pressure}\n" \
