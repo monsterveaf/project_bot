@@ -19,6 +19,11 @@ class TestProjectBot(TestCase):
             with self.subTest(k):
                 self.assertEqual(k.lower(), get_weather(*v)["Your location"].lower())
 
+    def test_get_weather_exception(self) -> None:
+        """This test checks how get_weather raises an exception"""
+        sample = ("Please, check the name of a city you entered", ("abrakadabra", weather_token))
+        self.assertEqual(sample[0].lower(), get_weather(*sample[1]).lower())
+
     def test_dict_return(self) -> None:
         """This func test the correct output of dict_return"""
 
