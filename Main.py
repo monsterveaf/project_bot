@@ -1,5 +1,4 @@
 import datetime
-import sys
 import requests
 import telegram as tg
 import telegram.ext as tge
@@ -19,6 +18,7 @@ def get_weather(city, token):
         request = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={token}&units=metric"
         )
+
         json_data = request.json()
         location = json_data["name"]
         weather_desc = json_data["weather"][0]["main"]
@@ -32,8 +32,10 @@ def get_weather(city, token):
 
     except KeyError:
         return "Please, check the name of a city you entered"
+
     except requests.exceptions.Timeout:
         return "Please, try to connect in few minutes"
+
     except requests.ConnectionError:
         return "Sorry, something is wrong with the server. Try to connect a bit later"
 
@@ -111,6 +113,7 @@ def inline_caps(update: tg.Update, context: tge.CallbackContext):
         input_message_content=tg.InputTextMessageContent(dict_return(get_weather(query, weather_token))),
         description=f"Today's weather for {query}"
     )]
+
     context.bot.answer_inline_query(update.inline_query.id, results)
 
 

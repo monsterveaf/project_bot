@@ -36,5 +36,6 @@ class TestProjectBot(TestCase):
 
     def test_get_weather_exception(self) -> None:
         """This test checks how get_weather raises an exception"""
+
         sample = ("Please, check the name of a city you entered", ("abrakadabra", weather_token))
         self.assertEqual(sample[0].lower(), get_weather(*sample[1]).lower())
