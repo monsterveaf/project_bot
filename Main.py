@@ -5,7 +5,6 @@ import telegram as tg
 import telegram.ext as tge
 
 weather_token = '22d38e4b789796c92e6e4fe65846ff67'
-fake_token = '21d38e4b789796c92e6e4fe65846ff67'
 
 # Create a connection with bot
 updater = tge.Updater(token='5780766591:AAFyzLIU3DGshE5kHsOYJro5O3Je-yF09Fg')
@@ -19,10 +18,13 @@ def get_weather(city, token):
         request = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={token}&units=metric"
         )
+
     except KeyError:
         return "Please, check the name of a city you entered"
+
     except requests.exceptions.Timeout:
         return "Please, try to connect in few minutes"
+
     except requests.ConnectionError:
         return "Sorry, something is wrong with the server. Try to connect a bit later"
 
@@ -111,6 +113,7 @@ def inline_caps(update: tg.Update, context: tge.CallbackContext):
         input_message_content=tg.InputTextMessageContent(dict_return(get_weather(query, weather_token))),
         description=f"Today's weather for {query}"
     )]
+
     context.bot.answer_inline_query(update.inline_query.id, results)
 
 
