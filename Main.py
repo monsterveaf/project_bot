@@ -4,6 +4,7 @@ import requests
 import datetime
 
 weather_token = '22d38e4b789796c92e6e4fe65846ff67'
+fake_token = '21d38e4b789796c92e6e4fe65846ff67'
 
 # Create a connection with bot
 updater = tge.Updater(token='5780766591:AAFyzLIU3DGshE5kHsOYJro5O3Je-yF09Fg')
@@ -18,6 +19,7 @@ def get_weather(city, token):
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={token}&units=metric"
         )
         json_data = request.json()
+        location = json_data["name"]
         weather_desc = json_data["weather"][0]["main"]
         curr_temp = int(json_data["main"]["temp"])
         max_temp = int(json_data["main"]["temp_max"])
@@ -27,16 +29,20 @@ def get_weather(city, token):
         pressure = json_data["main"]["pressure"]
         wind_speed = int(json_data["wind"]["speed"])
 
-        return f"Date and time: {datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S')}\n" \
-               f"Your location: {city}\n" \
-               f"Weather description: {weather_desc}\n" \
-               f"Current temperature: {curr_temp}° С\n" \
-               f"Minimal temperature: {min_temp}° С\n" \
-               f"Maximal temperature: {max_temp}° С\n" \
-               f"Temperature feels like: {feels_temp}° С\n" \
-               f"Humidity: {humidity}%\n" \
-               f"Pressure: {pressure} hPa\n" \
-               f"Wind speed: {wind_speed} m/s"
+        result = {
+            "Date and time": datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S'),
+            "Your location": location,
+            "Weather description": weather_desc,
+            "Current temperature": curr_temp,
+            "Minimal temperature": min_temp,
+            "Maximal temperature": max_temp,
+            "Temperature feels like": feels_temp,
+            "Humidity": humidity,
+            "Pressure": pressure,
+            "Wind speed": wind_speed
+        }
+
+        return result
 
     except KeyError:
         return "Please, check the name of a city you entered"
