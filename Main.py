@@ -22,7 +22,7 @@ def get_weather(city, token):
     except KeyError:
         return "Please, check the name of a city you entered"
     except requests.exceptions.Timeout:
-        return "Please, try to connect in few minutues"
+        return "Please, try to connect in few minutes"
     except requests.ConnectionError:
         return "Sorry, something is wrong with the server. Try to connect a bit later"
 
@@ -80,10 +80,10 @@ def weather(update: tg.Update, context: tge.CallbackContext):
 def dict_return(weather_dict):
     """Return a message from a dict"""
 
-    message = ""
-
     if isinstance(weather_dict, str):
         return weather_dict
+
+    message = ""
 
     for key, value in weather_dict.items():
         message += key + ": " + value + "\n"
