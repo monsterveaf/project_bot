@@ -21,13 +21,13 @@ def get_weather(city, token):
         json_data = request.json()
         location = json_data["name"]
         weather_desc = json_data["weather"][0]["main"]
-        curr_temp = int(json_data["main"]["temp"])
-        max_temp = int(json_data["main"]["temp_max"])
-        min_temp = int(json_data["main"]["temp_min"])
-        feels_temp = int(json_data["main"]["feels_like"])
-        humidity = json_data["main"]["humidity"]
-        pressure = json_data["main"]["pressure"]
-        wind_speed = int(json_data["wind"]["speed"])
+        curr_temp = str(round(json_data["main"]["temp"])) + "° С"
+        max_temp = str(round(json_data["main"]["temp_max"])) + "° С"
+        min_temp = str(round(json_data["main"]["temp_min"])) + "° С"
+        feels_temp = str(round(json_data["main"]["feels_like"])) + "° С"
+        humidity = str(json_data["main"]["humidity"]) + "%"
+        pressure = str(json_data["main"]["pressure"]) + " hPa"
+        wind_speed = str(round(json_data["wind"]["speed"])) + " m/s"
 
         result = {
             "Date and time": datetime.datetime.now().strftime('%m/%d/%Y, %H:%M:%S'),
@@ -62,8 +62,28 @@ def weather(update: tg.Update, context: tge.CallbackContext):
     """ Receive location and sends weather """
 
     location = update.message.text
+
+    if len(location) > 35:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Ti kogo xoches noebat'")
+        return
+
     weather_input = get_weather(location, weather_token)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=weather_input)
+    message = dict_return(weather_input)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+
+def dict_return(weather_dict):
+    """Return a message from a dict"""
+
+    message = ""
+
+    if isinstance(weather_dict, str):
+        return weather_dict
+
+    for key, value in weather_dict.items():
+        message += key + ": " + value + "\n"
+
+    return message
 
 
 def unknown(update: tg.Update, context: tge.CallbackContext):
@@ -77,13 +97,13 @@ def inline_caps(update: tg.Update, context: tge.CallbackContext):
 
     query = update.inline_query.query
 
-    if not query:
-        return "Shoto strannoe"
+    if not query or len(query) > 35:
+        return
 
     results = [tg.InlineQueryResultArticle(
         id=query.upper(),
         title='Weather',
-        input_message_content=tg.InputTextMessageContent(get_weather(query, weather_token)),
+        input_message_content=tg.InputTextMessageContent(dict_return(get_weather(query, weather_token))),
         description=f"Today's weather for {query}"
     )]
     context.bot.answer_inline_query(update.inline_query.id, results)
