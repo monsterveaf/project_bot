@@ -8,6 +8,7 @@ from Main import dict_return
 class TestProjectBot(TestCase):
     def test_get_weather(self) -> None:
         """This test checks whether input from a user equals output from API"""
+
         cases = [
             ("Moscow", ("Moscow", weather_token)),
             ("Saint Petersburg", ("Saint Petersburg", weather_token)),
@@ -15,6 +16,7 @@ class TestProjectBot(TestCase):
             ("Perm", ("Perm", weather_token)),
             ("Samara Oblast", ("Samara Oblast", weather_token))
         ]
+
         for k, v in cases:
             with self.subTest(k):
                 self.assertEqual(k.lower(), get_weather(*v)["Your location"].lower())
@@ -32,6 +34,7 @@ class TestProjectBot(TestCase):
             (["word: something\n" "nothing: goodjob\n"], {"word": "something", "nothing": "goodjob"}),
             (["temp: 42C\n" "wind: 53m/s\n" "humidity: 76%\n"], {"temp": "42C", "wind": "53m/s", "humidity": "76%"}),
         ]
+
         for k, v in cases:
             with self.subTest(k):
                 self.assertEqual(*k, dict_return(v))
