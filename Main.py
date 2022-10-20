@@ -4,11 +4,6 @@ import telegram as tg
 import telegram.ext as tge
 
 weather_token = '22d38e4b789796c92e6e4fe65846ff67'
-fake_token = '21d38e4b789796c92e6e4fe65846ff67'
-
-# Create a connection with bot
-updater = tge.Updater(token='5780766591:AAFyzLIU3DGshE5kHsOYJro5O3Je-yF09Fg')
-dispatcher = updater.dispatcher
 
 
 def get_weather(city, token):
@@ -118,6 +113,11 @@ def inline_caps(update: tg.Update, context: tge.CallbackContext):
 
 
 if __name__ == '__main__':
+
+    # Create a connection with bot
+    updater = tge.Updater(token='5780766591:AAFyzLIU3DGshE5kHsOYJro5O3Je-yF09Fg')
+    dispatcher = updater.dispatcher
+
     # Create a tracker for start command with welcome speech
     start_handler = tge.CommandHandler('start', start)
     dispatcher.add_handler(start_handler)
