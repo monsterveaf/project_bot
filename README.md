@@ -37,8 +37,8 @@ Bot consists of a list of functions:
 > 
 > ![img_4.png](Images/img_4.png)
 >
->
-If there is no error, it starts functions "get_weather", "dict_return" and sends
+> 
+>If there is no error, it starts functions "get_weather", "dict_return" and sends
 > messages with data back to user.
 > 
 > 
