@@ -15,15 +15,14 @@ Our project uses 4 libraries:
 3. telegram
 4. telegram.ext
 
-Bot uses 2 Tokens (я бы хотел, чтобы за них пояснили вы)
+Bot uses 2 Tokens
 
 Bot consists of a list of functions:
 
 - start
 > This function receive a "start message" and send the greetings to the user.
 > 
-> 
-![img_1.png](Images/img_1.png)
+>![img_1.png](Images/img_1.png)
 
 - unknown
 > If user enter incorrect command, bot will reply to him/her.
