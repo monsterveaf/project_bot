@@ -21,17 +21,28 @@ Bot consists of a list of functions:
 
 - start
 > This function receive a "start message" and send the greetings to the user.
+> 
+> 
 ![img_1.png](Images/img_1.png)
+
 - unknown
 > If user enter incorrect command, bot will reply to him/her.
+> 
+> 
 > ![img_5.png](Images/img_5.png)
 
 - weather
 > Function is used to get the name of the city and check, whether it exists
 > or not. If the len of the input exceed 35 symbols, user gets warning message.
+> 
+> 
 > ![img_4.png](Images/img_4.png)
-> If there is no error, it starts functions "get_weather", "dict_return" and sends
+>
+>
+If there is no error, it starts functions "get_weather", "dict_return" and sends
 > messages with data back to user.
+> 
+> 
 > ![img_6.png](Images/img_6.png)
 > 
 - get_weather
@@ -48,7 +59,11 @@ Bot consists of a list of functions:
 > 
 - incline_caps
 > It allows users apply bot functions in other chats.
+> 
+> 
 > ![img_8.png](Images/img_8.png)
+>
+> 
 > ![img_9.png](Images/img_9.png)
 
 ---
