@@ -28,11 +28,17 @@ class TestProjectBot(TestCase):
             (["2: 1\n" "3: 1\n"], {"2": "1", "3": "1"}),
             (["word: something\n" "nothing: goodjob\n"], {"word": "something", "nothing": "goodjob"}),
             (["temp: 42C\n" "wind: 53m/s\n" "humidity: 76%\n"], {"temp": "42C", "wind": "53m/s", "humidity": "76%"}),
+            ("Check the city", "Check the city")
         ]
 
         for k, v in cases:
             with self.subTest(k):
-                self.assertEqual(*k, dict_return(v))
+
+                if isinstance(k, str):
+                    self.assertEqual(k, dict_return(v))
+
+                else:
+                    self.assertEqual(*k, dict_return(v))
 
     def test_get_weather_exception(self) -> None:
         """This test checks how get_weather raises an exception"""

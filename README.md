@@ -1,9 +1,12 @@
 **Armenian weather bot**
 ============================================================
 ![](https://imgtest.mir24.tv/uploaded/images/crops/2022/February/870x489_903x0_detail_crop_20220225123615_d6ff9cb2_8f7a1da83fbd942465b2c13d3c6749c0d18701a854fdc6c261f1af840e3b5af7.jpg)
+
 This bot would be helpful for everyone who wants to find out
 the weather condition at any place on Earth. Temperature, pressure, humidity - 
 all this information and even more will be available for users.
+
+Our teammate Ruben was an idea-tor of this project. The bot was respectively written off his real life behavior.
 
 ---
 Our project uses 4 libraries:
